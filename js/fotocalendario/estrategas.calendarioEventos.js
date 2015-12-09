@@ -23,8 +23,6 @@
 			}
 			inicializandoEventoCalendario(elCalendario, opciones);
 		}
-
-
 	};
 
 	

@@ -40,25 +40,29 @@
 
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-///////////////////////////////Home/////////////////////////////////////
+///////////////////////////////fotocalendario//////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
 
-$route['default_controller']	 		= 'Home';
+$route['default_controller']	 		= 'Fotocalendario';
 $route['404_override'] 					= '';
 
-$route['validacion_comprimir']							= 'home/validacion_comprimir';
+$route['validacion_comprimir']							= 'fotocalendario/validacion_comprimir';
 
-$route['fotocalendario']							= 'home/fotocalendario';
-$route['validar_nuevo_fotocalendario']							= 'home/validar_nuevo_fotocalendario';
+$route['fotocalendario']							= 'fotocalendario/index';
+$route['validar_nuevo_fotocalendario']							= 'fotocalendario/validar_nuevo_fotocalendario';
 
-$route['guardar_lista']							= 'home/guardar_lista';
-$route['noguardar_lista']							= 'home/noguardar_lista';
+$route['guardar_lista']							= 'fotocalendario/guardar_lista';
+$route['noguardar_lista']							= 'fotocalendario/noguardar_lista';
 
 
-$route['leer_lista']							= 'home/leer_lista';
-$route['diseno_lista']							= 'home/diseno_lista';
+$route['leer_lista']							= 'fotocalendario/leer_lista';
+$route['diseno_lista']							= 'fotocalendario/diseno_lista';
+
+///////////////////////////////////////imagen//////////////////////////////////////////
+$route['fotoimagen/(:any)']							= 'fotocalendario/fotoimagen/$1';
+
 
 
 

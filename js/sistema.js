@@ -163,6 +163,7 @@ jQuery('#total[restriccion="decimal"]').bind('keypress paste', function (e) {
 
 // catalogo de proveedores
 /*
+
 jQuery('#codigo[restriccion="numletra"]').bind('keypress paste', function (event) {
     var regex = new RegExp("^[a-zA-Z0-9]+$");
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);

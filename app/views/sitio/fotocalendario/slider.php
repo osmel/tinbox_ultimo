@@ -13,29 +13,16 @@
 
                                 <div class="col-sm-12 col-md-12">
                                    <button value="1" type="button" class="eliminar_slider btn btn-danger btn-block ttip" title="este es el tooltip.">Eliminar</button>
-                                </div>                              
+                                </div>      1                        
 
                                 
-                                <!--
-                                
-                                <div class="col-sm-12 col-md-12">
-                                  <a href="<?php echo base_url(); ?>eliminar_usuario/<?php echo base64_encode(1)  ; ?>"  
-                                    class="btn btn-danger btn-sm btn-block" data-toggle="modal" data-target="#modalMessage">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                  </a>
-                                </div> 
-
-
-
-
-                                 -->                            
-
-
-                    
+                   
 
                               <img src="http://placehold.it/150x150" style="border:1px solid;">
                           </div>
                           
+
+                          <!--
                           <div class="row">---- </div>
                           
                           <div class="row cuadro_slider" value="2">
@@ -46,7 +33,7 @@
 
                                 <div class="col-sm-12 col-md-12">
                                    <button value="2" type="button" class="eliminar_slider btn btn-danger btn-block ttip" title="este es el tooltip.">Eliminar</button>
-                                </div>                              
+                                </div>    2                         
 
                               <img src="http://placehold.it/150x150" style="border:1px solid;">
                           </div>  
@@ -61,7 +48,7 @@
 
                                 <div class="col-sm-12 col-md-12">
                                    <button value="3" type="button" class="eliminar_slider btn btn-danger btn-block ttip" title="este es el tooltip.">Eliminar</button>
-                                </div>                              
+                                </div>     3                         
 
                               <img src="http://placehold.it/150x150" style="border:1px solid;">
                           </div>       
@@ -76,7 +63,7 @@
 
                                 <div class="col-sm-12 col-md-12">
                                    <button value="4" type="button" class="eliminar_slider btn btn-danger btn-block ttip" title="este es el tooltip.">Eliminar</button>
-                                </div>                              
+                                </div>     4                         
 
                               <img src="http://placehold.it/150x150" style="border:1px solid;">
                           </div>     
@@ -90,11 +77,11 @@
 
                                 <div class="col-sm-12 col-md-12">
                                    <button value="5" type="button" class="eliminar_slider btn btn-danger btn-block ttip" title="este es el tooltip.">Eliminar</button>
-                                </div>                              
+                                </div>      5                        
 
                               <img src="http://placehold.it/150x150" style="border:1px solid;">
                           </div>                                                                        
-
+                         --> 
                   </div>  
             </div> 
 

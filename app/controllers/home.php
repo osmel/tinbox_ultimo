@@ -27,17 +27,28 @@ class Home extends CI_Controller {
 
 
 
-	public function sitio(){
+	public function fotoimagen($session){
 		//$this->load->view( 'sitio/home' );
 		//$this->load->view( 'sitio/home' );
 		
-		
-		
-		//$this->load->view( 'sitio/croppear' );
+		$session = base64_decode($session);
+		$this->load->view( 'sitio/croppear' );
 		
 	}
 
+
 	public function fotocalendario(){
+
+
+			//ir a la seccion de imagen	   
+
+		if (isset($_POST['finalizar'])) {
+				$data['finalizar']   = $_POST['finalizar'];
+
+				if ($data['finalizar']=='Continuar') {
+					redirect('http://localhost/tinbox/fotoimagen/'.base64_encode($_POST['id_session']));
+				}
+		}		
 		
 		$data['festividades'] = $this->modelo_fotocalendario->listado_festividades();
 		$data['logos'] = $this->modelo_fotocalendario->listado_logos();
@@ -45,8 +56,8 @@ class Home extends CI_Controller {
 
 						$data['correo_activo']   = 'osmel@gmail.com';
 			   	   
-	      $data['cantDiseno_original']   = 5;
-			   	   $data['cantDiseno']   = 5;
+	      $data['cantDiseno_original']   = 1; //5;
+			   	   $data['cantDiseno']   = 1; //5;
 			   $data['posicionDiseno']   = 1;
 			      $data['movposicion']   = 1;
 			   
@@ -61,17 +72,23 @@ class Home extends CI_Controller {
 		if (isset($_POST['posicionDiseno'])) {
 
 				$data['correo_activo']   = $_POST['correo_activo'];//$this->input->post('nombre_mes');
+		  $data['cantDiseno_original']   = $_POST['cantDiseno_original']; //$this->input->post('cantDiseno');
 			   	   $data['cantDiseno']   = $_POST['cantDiseno']; //$this->input->post('cantDiseno');
 			   $data['posicionDiseno']   = $_POST['posicionDiseno']; //$this->input->post('posicionDiseno');
-			   $data['movposicion']   = $_POST['movposicion']; //$this->input->post('posicionDiseno');
+			      $data['movposicion']   = $_POST['movposicion']; //$this->input->post('posicionDiseno');
 
-			   $data['id_session']   = $_POST['id_session']; //$this->input->post('posicionDiseno');
+			   $data['id_session']   	 = $_POST['id_session']; //$this->input->post('posicionDiseno');
 			   $data['array_eliminar']   = $_POST['array_eliminar']; //$this->input->post('posicionDiseno');
 			    
+
+
+
+
+
+
+
 		} 
 		
-
-
 
 
 		$data['calendario']          = $this->modelo_fotocalendario->fotocalendario_edicion( $data );
@@ -79,18 +96,12 @@ class Home extends CI_Controller {
 		$data['listas'] = $this->modelo_fotocalendario->listado_listas($data);
 
 
+		if ($data['cantDiseno']!=0) {
+			$this->load->view( 'sitio/fotocalendario/seccion3', $data );	
+		} else { //si eliminan todo retornar a elegir diseño
+			redirect('http://localhost/tinbox');
+		}
 		
-
-
-			//
- 	  	   
- 	  	   
- 	  	   //lista de un diseño particular
-		//$data['uid_fotocalendario'] = $data['calendario']->uid_fotocalendario;
-      	//$dato['listas_dia'] = $this->modelo_fotocalendario->listadias_fcalendario($data);
-      	//$dato['list_mes'] = $this->modelo_fotocalendario->listames_fcalendario($data);
-
-		$this->load->view( 'sitio/fotocalendario/seccion3', $data );
 	}
 
 
