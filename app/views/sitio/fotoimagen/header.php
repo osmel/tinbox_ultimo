@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     
 	   <!--este es quien tiene los iconos -->
-	     <?php  echo link_tag('cropear/assets/css/font-awesome.min.css'); ?>
-	     <?php  echo link_tag('cropear/dist/cropper.css'); ?>
-	     <?php  echo link_tag('cropear/demo/css/main.css'); ?>
+	     <?php  echo link_tag('css/fotoimagen/cropear/assets/css/font-awesome.min.css'); ?>
+	     <?php  echo link_tag('css/fotoimagen/cropear/dist/cropper.css'); ?>
+	     <?php  echo link_tag('css/fotoimagen/cropear/demo/css/main.css'); ?>
 
 
 </head>

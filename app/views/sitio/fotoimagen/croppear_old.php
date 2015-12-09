@@ -6,11 +6,14 @@
   <!-- Content -->
   <div class="container">
     <div class="row">
-      
-      <div class="col-md-9">
+      <div class="col-md-3">
+         <?php $this->load->view( 'sitio/fotoimagen/slider' ); ?>
+      </div>
+
+      <div class="col-md-6">
          <h3 class="page-header">Imagen:</h3> 
         <div class="img-container">
-          <img id="image" src="<?php echo base_url(); ?>cropear/assets/img/picture.jpg" alt="Picture">
+          <img id="image" style="height:100%" src="<?php echo base_url(); ?>js/fotoimagen/cropear/assets/img/picture.jpg" alt="Picture">
         </div>
       </div>
 
@@ -60,6 +63,8 @@
           </div>
         </div>
       </div>
+
+      
     </div>
     <div class="row">
       <div class="col-md-9 docs-buttons">
