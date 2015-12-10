@@ -63,6 +63,8 @@ $route['diseno_lista']							= 'fotocalendario/diseno_lista';
 ///////////////////////////////////////imagen//////////////////////////////////////////
 $route['fotoimagen/(:any)']							= 'fotocalendario/fotoimagen/$1';
 
+$route['upload']							= 'fotocalendario/upload';
+
 
 
 

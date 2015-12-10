@@ -12,8 +12,55 @@ class Fotocalendario extends CI_Controller {
         $this->load->library('Jquery_pagination');//-->la estrella del equipo		
 	}
 
+	public function upload(){
+		/*if(is_array($_FILES)) {
+			if(is_uploaded_file($_FILES['userImage']['tmp_name'])) {
+				$sourcePath = $_FILES['userImage']['tmp_name'];
+				$targetPath = '"'.base_url().'uploads/'.$_FILES['userImage']['name'].'"';
+				if(move_uploaded_file($sourcePath,$targetPath)) {
+					
+						echo '<div id="cont_img">';
+							echo '<img src="'.base_url().$targetPath.'" width="100%" height="100%"/>';
+						echo '</div>';
+			
+				}
+			}
+		}*/
 
 
+ 		 	  
+ 		 	  if (!empty($_FILES)) {
+
+		          $config_adjunto['upload_path']    = './uploads/';
+		          $config_adjunto['allowed_types']  = 'jpg|png|gif|jpeg';
+		          $config_adjunto['max_size']     = '20480';
+		          //$config_adjunto['file_name']    = 'img_'.$data['uid_fotocalendario'];
+		          $config_adjunto['overwrite']    = true;
+
+		          $this->load->library('upload', $config_adjunto);
+
+		          //$this->upload->do_upload(); 
+
+					foreach ($_FILES as $key => $value) {
+					    if ($this->upload->do_upload($key)) {
+								$data['logo'] = $this->upload->data();		
+						} else {
+							$data['logo']['file_name'] =$this->input->post('ca_logo');
+						}					  	
+					} 	 
+					//print_r($data['logo']);      
+					$targetPath=   base_url().'uploads/'.$data['logo']['file_name'];      
+
+					echo '<div class="img-container" id="cont_img" style="height:516px;width:516px;">';
+							echo '<img id="image" src="'.$targetPath.'" style="height:100%;width:100%;" alt="Picture"/>';
+					echo '</div>'; 
+
+		          
+		      } 
+				   echo '<script src="'.base_url().'js/fotoimagen/cropear/demo/js/main.js" type="text/javascript"></script>';
+
+
+	}	
 
 	public function fotoimagen($session){
 	
@@ -230,9 +277,6 @@ class Fotocalendario extends CI_Controller {
 							$data['logo']['file_name'] =$this->input->post('ca_logo');
 						}					  	
 					} 	          
-
-					
-					
 
 		          
 		      }   

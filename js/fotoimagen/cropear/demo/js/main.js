@@ -14,7 +14,10 @@ $(function () {
   var $dataScaleY = $('#dataScaleY');
   
   var options = {
-  
+ 
+
+// http://codecanyon.net/item/html-5-upload-image-ratio-with-drag-and-drop/full_screen_preview/8712634?ref=jqueryrain
+
 /*
 
 
@@ -53,10 +56,10 @@ $(function () {
         preview: '.img-preview',
 */
 
-        aspectRatio: 4 / 3,
+        aspectRatio: 1 / 1,
         preview: '.img-preview',
-        minCropBoxWidth: 672,
-        minCropBoxHeight: 672,
+        minCropBoxWidth: 516,
+        minCropBoxHeight: 516,
         dragCrop: false,
         mouseWheelZoom: false,
         resizable: false,
@@ -72,8 +75,8 @@ $(function () {
         },
         built:function(){
                 $('#image').cropper('setCropBoxData',{
-                    width: 672,
-                    height: 672
+                    width: 516,
+                    height: 516
                 });
             }        
       };
@@ -84,6 +87,7 @@ $(function () {
 
 
   // Cropper
+
   $image.on({
     
     //"build" Es llamada cuando una instancia cropper comienza a cargar una imagen.
@@ -128,6 +132,7 @@ $(function () {
 
 
   // Buttons
+  /*
   if (!$.isFunction(document.createElement('canvas').getContext)) {
     $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
   }
@@ -136,15 +141,19 @@ $(function () {
     $('button[data-method="rotate"]').prop('disabled', true);
     $('button[data-method="scale"]').prop('disabled', true);
   }
+  */
 
 
   // Download
+  /*
   if (typeof $download[0].download === 'undefined') {
-    $download.addClass('disabled');
+    alert('1');
+    //$download.addClass('disabled');
   }
-
+*/
 
   // Options  // todos los botones que estan al lado derecho "desde 16:9 - toggle options"
+  /*
   $('.docs-toggles').on('change', 'input', function () {
     var $this = $(this);
     var name = $this.attr('name');
@@ -171,6 +180,8 @@ $(function () {
 
     $image.cropper('destroy').cropper(options);
   });
+*/
+
 
 
   // Methods //click encima de cualquier boton que esta debajo de la imagen
@@ -202,21 +213,29 @@ $(function () {
       result = $image.cropper(data.method, data.option, data.secondOption);
 
       switch (data.method) {
+        
         case 'scaleX':
         case 'scaleY':
           $(this).data('option', -data.option);
           break;
-
+        
         case 'getCroppedCanvas':
-          if (result) {
 
+        
+          if (result) {
+            
             // Bootstrap's Modal
             $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
-
+          
             if (!$download.hasClass('disabled')) {
-              $download.attr('href', result.toDataURL());
+              alert(result.toDataURL());
+              return false;
+              //$download.attr('href', result.toDataURL());
             }
+            
+            
           }
+          
 
           break;
       }
@@ -233,6 +252,7 @@ $(function () {
   });
 
 
+/*
   // Keyboard   //cuando muevo con las teclas 
   $(document.body).on('keydown', function (e) {
 
@@ -263,7 +283,7 @@ $(function () {
     }
 
   });
-
+*/
 
   // Import image
   var $inputImage = $('#inputImage');

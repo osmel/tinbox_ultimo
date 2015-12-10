@@ -11,10 +11,10 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.form.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>js/spin.min.js"></script>
 
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
- <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 
 
 
@@ -38,17 +38,20 @@
 
     <!-- Mi estilo -->
     <?php  echo link_tag('css/estilo.css'); ?>
-    
-    
 
-  <!-- Scripts croppear  -->
-  <script src="<?php echo base_url(); ?>js/fotoimagen/cropear/dist/cropper.js" type="text/javascript"></script>
- 
-
-  <script src="<?php echo base_url(); ?>js/fotoimagen/cropear/demo/js/main.js" type="text/javascript"></script>
+    <!-- Scripts croppear  -->
+    <script src="<?php echo base_url(); ?>js/fotoimagen/cropear/dist/cropper.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>js/fotoimagen/cropear/demo/js/main.js" type="text/javascript"></script>
   
 
+
+<!-- Arrastrar imagenes
+       <script type="text/javascript" src="<?php echo base_url(); ?>js/dist/min/dropzone.min.js"></script>
+       <script type="text/javascript" src="<?php echo base_url(); ?>js/dropzone.js"></script>
+       <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>js/dist/min/basic.min.css">
   
+-->
+    <script src="<?php echo base_url(); ?>js/fotoimagen/sistema.js" type="text/javascript"></script>
 
 
 

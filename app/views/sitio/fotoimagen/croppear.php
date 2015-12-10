@@ -5,17 +5,22 @@
 
   <!-- Content -->
   <div class="container">
+
     <div class="row">
       
       <div class="col-md-3">
          <?php $this->load->view( 'sitio/fotoimagen/slider' ); ?>
       </div>
 
-      <div class="col-md-6">
-         <h3 class="page-header">Imagen:</h3> 
-        <div class="img-container">
-          <img id="image" style="height:100%" src="<?php echo base_url(); ?>js/fotoimagen/cropear/assets/img/picture.jpg" alt="Picture">
+      <h3 class="page-header">Imagen:</h3> 
+      <div class="col-md-6" id="drop-area" style="min-height:572px; padding:10px;border: 2px solid blue;">         
+      
+      <!--
+         
+        <div class="img-container" id="cont_img">
+          <img id="image" style="height:100%;width:100%" src="<?php echo base_url(); ?>js/fotoimagen/cropear/assets/img/picture.jpg" alt="Picture">
         </div>
+        -->
       </div>
  
 
@@ -29,6 +34,7 @@
         </div>
 
         <!-- <h3 class="page-header">Data:</h3> -->
+        <!-- 
         <div class="docs-data">
           <div class="input-group input-group-sm">
             <label class="input-group-addon" for="dataX">X</label>
@@ -64,6 +70,8 @@
             <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
           </div>
         </div>
+        -->
+
       </div>
 
 
@@ -71,6 +79,7 @@
     <div class="row">
       <div class="col-md-9 docs-buttons">
         <!-- <h3 class="page-header">Toolbar:</h3> -->
+        <!--
         <div class="btn-group">
           <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="move" title="Move">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
@@ -190,23 +199,34 @@
             </span>
           </button>
         </div>
+        -->
 
         <div class="btn-group btn-group-crop">
           <button type="button" class="btn btn-primary" data-method="getCroppedCanvas">
+            
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;)">
               Get Cropped Canvas
             </span>
+
           </button>
+          
+
           <button type="button" class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 160, &quot;height&quot;: 90 }">
+            
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;, { width: 160, height: 90 })">
               160&times;90
             </span>
+
           </button>
           <button type="button" class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 320, &quot;height&quot;: 180 }">
+            
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;, { width: 320, height: 180 })">
               320&times;180
             </span>
+            
           </button>
+
+
         </div>
 
         <!-- Show the cropped image in modal -->
@@ -226,6 +246,14 @@
           </div>
         </div><!-- /.modal -->
 
+
+
+
+
+
+
+
+<!--
         <button type="button" class="btn btn-primary" data-method="getData" data-option data-target="#putData">
           <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getData&quot;)">
             Get Data
@@ -283,10 +311,13 @@
         </button>
         <input type="text" class="form-control" id="putData" placeholder="Get data to here or set data with this value">
 
-      </div><!-- /.docs-buttons -->
+-->
+       </div><!-- /.docs-buttons -->
+
+        <!-- <h3 class="page-header">Toggles:</h3> -->
 
       <div class="col-md-3 docs-toggles">
-        <!-- <h3 class="page-header">Toggles:</h3> -->
+      <!--
         <div class="btn-group btn-group-justified" data-toggle="buttons">
           <label class="btn btn-primary active">
             <input type="radio" class="sr-only" id="aspectRatio0" name="aspectRatio" value="1.7777777777777777">
@@ -346,8 +377,9 @@
             </span>
           </label>
         </div>
-
+        -->
         <div class="dropdown dropup docs-options">
+        <!--
           <button type="button" class="btn btn-primary btn-block dropdown-toggle" id="toggleOptions" data-toggle="dropdown" aria-expanded="true">
             Toggle Options
             <span class="caret"></span>
@@ -458,6 +490,7 @@
               </label>
             </li>
           </ul>
+          -->
         </div><!-- /.dropdown -->
       </div><!-- /.docs-toggles -->
     </div>
