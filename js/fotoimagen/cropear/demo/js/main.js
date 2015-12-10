@@ -220,22 +220,17 @@ $(function () {
           break;
         
         case 'getCroppedCanvas':
-
-        
           if (result) {
-            
+
             // Bootstrap's Modal
             $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
-          
+
             if (!$download.hasClass('disabled')) {
-              alert(result.toDataURL());
-              return false;
-              //$download.attr('href', result.toDataURL());
+              //alert(result.toDataURL());
+              //http://www.jqueryscript.net/demo/jQuery-In-Place-Image-Cropping-Plugin-cropbox/
+              $download.attr('href', result.toDataURL());
             }
-            
-            
           }
-          
 
           break;
       }
