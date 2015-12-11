@@ -55,14 +55,52 @@ $(function () {
         aspectRatio: 16 / 9,
         preview: '.img-preview',
 */
-
+        //Estableciendo la relación de aspecto
         aspectRatio: 1 / 1,
+        //viewMode: 3,
+
+        //deshabilita para recortar la imagen de forma automática cuando initialize.
+        autoCropArea: 1,
+        restore: false,
+        
+        //Mostrar el modal negro sobre la imagen y en el cuadro de recorte.
+        modal: false,
+        //Mostrar las líneas de puntos(dashed ) por encima del cuadro de recorte.
+        guides: false,
+
+        //Mostrar el modal blanco sobre el cuadro de recorte (resaltando el cuadro de recorte).
+        highlight: false,
+
+
+
         preview: '.img-preview',
-        minCropBoxWidth: 516,
-        minCropBoxHeight: 516,
         dragCrop: false,
-        mouseWheelZoom: false,
-        resizable: false,
+        mouseWheelZoom: true,
+        resizable: true,
+
+        //comenzar con el estado de mover (manito)
+        dragMode: 'move',
+        //Deshabilitar el cambio entre el modo "crop" y "move"  al hacer dobleClick
+        toggleDragModeOnDblclick:false,
+
+        //Desabilitar las acciones de mover y cambiar tamaño en cuadro de recorte.
+        cropBoxMovable:false,
+        cropBoxResizable:false,
+
+
+        //minimo en que se puede poner el contenedor        
+        minContainerHeight:500,
+        minContainerWidth:500,
+
+        //minimo en que se puede poner el cropper
+        minCropBoxWidth: 500,
+        minCropBoxHeight: 500,
+
+        //minimo en que puede achicar la imagen(Canvas)
+        minCanvasHeight:100, //minimo Alto de la imagen 
+        minCanvasWidth:100,  //minimo Ancho de la imagen
+
+
 
         crop: function (e) {
           $dataX.val(Math.round(e.x));
@@ -131,6 +169,27 @@ $(function () {
   }).cropper(options);
 
 
+
+    $image.cropper('getCroppedCanvas').toBlob(function (blob) {
+      var formData = new FormData();
+
+      formData.append('croppedImage', blob);
+
+      $.ajax('upload.php', {
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+          console.log('Upload success');
+        },
+        error: function () {
+          console.log('Upload error');
+        }
+      });
+    });
+    
+
   // Buttons
   /*
   if (!$.isFunction(document.createElement('canvas').getContext)) {
@@ -147,10 +206,11 @@ $(function () {
   // Download
   /*
   if (typeof $download[0].download === 'undefined') {
-    alert('1');
-    //$download.addClass('disabled');
+    //alert('1');
+    $download.addClass('disabled');
   }
-*/
+  */
+
 
   // Options  // todos los botones que estan al lado derecho "desde 16:9 - toggle options"
   /*
@@ -191,6 +251,7 @@ $(function () {
     var $target;
     var result;
 
+
     if ($this.prop('disabled') || $this.hasClass('disabled')) {
       return;
     }
@@ -223,12 +284,23 @@ $(function () {
           if (result) {
 
             // Bootstrap's Modal
-            $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+            //$('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+
+            //console.log($image.cropper("getCanvasData"));
+
+            $image.attr('href', result.toDataURL() );
 
             if (!$download.hasClass('disabled')) {
               //alert(result.toDataURL());
               //http://www.jqueryscript.net/demo/jQuery-In-Place-Image-Cropping-Plugin-cropbox/
-              $download.attr('href', result.toDataURL());
+              //console.log($image.getImageData());
+              //var canvasData;
+              //canvasData = $image.cropper('getCanvasData');
+              //console.log(canvasData);
+
+              //https://fengyuanchen.github.io/cropper/v0.7.9/
+              
+              //$download.attr('href', result.toDataURL());
             }
           }
 
@@ -247,9 +319,32 @@ $(function () {
   });
 
 
-/*
+
   // Keyboard   //cuando muevo con las teclas 
   $(document.body).on('keydown', function (e) {
+    
+    //console.log($image.cropper("getImageData"));
+    //console.log($('#image').cropper("getImageData"));
+
+    //console.log($image.cropper("getCanvasData"));
+    
+
+
+//$image.cropper('getCroppedCanvas')
+
+/*
+$image.cropper('getCroppedCanvas');
+
+$image.cropper('getCroppedCanvas', {
+  width: 160,
+  height: 90
+});
+*/
+
+
+
+    
+    return;
 
     if (!$image.data('cropper') || this.scrollTop > 300) {
       return;
@@ -266,6 +361,8 @@ $(function () {
         $image.cropper('move', 0, -1);
         break;
 
+
+
       case 39:
         e.preventDefault();
         $image.cropper('move', 1, 0);
@@ -278,7 +375,7 @@ $(function () {
     }
 
   });
-*/
+
 
   // Import image
   var $inputImage = $('#inputImage');

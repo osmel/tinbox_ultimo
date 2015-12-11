@@ -13,9 +13,10 @@
       </div>
 
       <h3 class="page-header">Imagen:</h3> 
-      <div class="col-md-6" id="drop-area" style="min-height:572px; padding:10px;border: 2px solid blue;">         
       
+      <div class="col-md-6" id="drop-area" style="max-width:520px;min-height:520px; padding:10px;border: 2px solid blue;">         
       <!--
+      <div class="col-md-6" id="drop-area" style="min-height:520px; padding:10px;border: 2px solid blue;">         
          
         <div class="img-container" id="cont_img">
           <img id="image" style="height:100%;width:100%" src="<?php echo base_url(); ?>js/fotoimagen/cropear/assets/img/picture.jpg" alt="Picture">
