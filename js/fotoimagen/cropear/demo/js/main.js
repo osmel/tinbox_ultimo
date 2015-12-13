@@ -170,25 +170,6 @@ $(function () {
 
 
 
-    $image.cropper('getCroppedCanvas').toBlob(function (blob) {
-      var formData = new FormData();
-
-      formData.append('croppedImage', blob);
-
-      $.ajax('upload.php', {
-        method: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function () {
-          console.log('Upload success');
-        },
-        error: function () {
-          console.log('Upload error');
-        }
-      });
-    });
-    
 
   // Buttons
   /*
@@ -242,6 +223,55 @@ $(function () {
   });
 */
 
+//http://www.scriptscoop.net/t/60e754985ac3/javascript-canvas-toblob-fails-when-a-patterned-fill-is-used.html
+/*
+if( !HTMLCanvasElement.prototype.toBlob ) {
+    Object.defineProperty( HTMLCanvasElement.prototype, 'toBlob', { 
+        value: function( callback, type, quality ) {
+            const bin = atob( this.toDataURL( type, quality ).split(',')[1] ),
+                  len = bin.length,
+                  len32 = len >> 2,
+                  a8 = new Uint8Array( len ),
+                  a32 = new Uint32Array( a8.buffer, 0, len32 );
+
+            for( var i=0, j=0; i < len32; i++ ) {
+                a32[i] = bin.charCodeAt(j++)  |
+                    bin.charCodeAt(j++) << 8  |
+                    bin.charCodeAt(j++) << 16 |
+                    bin.charCodeAt(j++) << 24;
+            }
+
+            let tailLength = len & 3;
+
+            while( tailLength-- ) {
+                a8[ j ] = bin.charCodeAt(j++);
+            }
+
+            callback( new Blob( [a8], {'type': type || 'image/png'} ) );
+        }
+    });
+}
+*/
+
+//https://developer.mozilla.org/es/docs/Web/API/HTMLCanvasElement/toBlob (PolyfillEDIT)
+if (!HTMLCanvasElement.prototype.toBlob) {
+ Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
+  value: function (callback, type, quality) {
+
+    var binStr = atob( this.toDataURL(type, quality).split(',')[1] ),
+        len = binStr.length,
+        arr = new Uint8Array(len);
+
+    for (var i=0; i<len; i++ ) {
+     arr[i] = binStr.charCodeAt(i);
+    }
+
+    callback( new Blob( [arr], {type: type || 'image/png'} ) );
+  }
+ });
+}
+
+
 
 
   // Methods //click encima de cualquier boton que esta debajo de la imagen
@@ -273,7 +303,57 @@ $(function () {
 
       result = $image.cropper(data.method, data.option, data.secondOption);
 
-      switch (data.method) {
+      console.log(result);
+
+
+      var croppedImageDataURL = result.toDataURL(); 
+
+      var formData = new FormData();
+
+      formData.append('croppedImage', croppedImageDataURL);
+
+      $.ajax('http://localhost/tinbox/upload', {
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+          console.log('Upload success');
+        },
+        error: function () {
+          console.log('Upload error');
+        }
+      });
+
+
+/*
+    result.toBlob(function (blob) {
+
+      var formData = new FormData();
+
+      formData.append('croppedImage', blob);
+
+      $.ajax('http://localhost/tinbox/upload', {
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+          console.log('Upload success');
+        },
+        error: function () {
+          console.log('Upload error');
+        }
+      });
+    }); //, 'image/jpg'
+    
+*/
+
+
+
+
+     // switch (data.method) {
+      switch (false) {
         
         case 'scaleX':
         case 'scaleY':
@@ -301,6 +381,8 @@ $(function () {
               //https://fengyuanchen.github.io/cropper/v0.7.9/
               
               //$download.attr('href', result.toDataURL());
+
+              //http://jsfiddle.net/PAEz/XfDUS/
             }
           }
 

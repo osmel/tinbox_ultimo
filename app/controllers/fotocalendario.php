@@ -13,8 +13,19 @@ class Fotocalendario extends CI_Controller {
 	}
 
 	public function upload(){
+		//http://www.re-cycledair.com/html-5-canvas-saving-to-a-file-with-php
+		$data = substr($_POST['croppedImage'], strpos($_POST['croppedImage'], ",") + 1);
+		$decodedData = base64_decode($data);
+		$fp = fopen("uploads/canvas.png", 'wb');
+		fwrite($fp, $decodedData);
+		fclose($fp);
+		
+
+		
 
  		 	  if (!empty($_FILES)) {
+
+
 
 		          $config_adjunto['upload_path']    = './uploads/';
 		          $config_adjunto['allowed_types']  = 'jpg|png|gif|jpeg';
@@ -29,6 +40,7 @@ class Fotocalendario extends CI_Controller {
 					foreach ($_FILES as $key => $value) {
 					    if ($this->upload->do_upload($key)) {
 								$data['logo'] = $this->upload->data();		
+								print_r($_FILES);
 						} else {
 							$data['logo']['file_name'] =$this->input->post('ca_logo');
 						}					  	

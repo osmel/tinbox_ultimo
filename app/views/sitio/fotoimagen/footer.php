@@ -41,6 +41,7 @@
 
     <!-- Scripts croppear  -->
     <script src="<?php echo base_url(); ?>js/fotoimagen/cropear/dist/cropper.js" type="text/javascript"></script>
+    
     <script src="<?php echo base_url(); ?>js/fotoimagen/cropear/demo/js/main.js" type="text/javascript"></script>
   
 

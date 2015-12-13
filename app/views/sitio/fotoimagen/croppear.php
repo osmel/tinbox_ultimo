@@ -4,6 +4,7 @@
 
 
   <!-- Content -->
+   <button id="guardar" type="button" class="btn btn-primary"> guardar</button>
   <div class="container">
 
     <div class="row">
