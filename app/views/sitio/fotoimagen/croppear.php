@@ -191,12 +191,15 @@
               <span class="fa fa-refresh"></span>
             </span>
           </button>
+    -->
+    
           <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
             <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
             <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
               <span class="fa fa-upload"></span>
             </span>
           </label>
+<!--          
           <button type="button" class="btn btn-primary" data-method="destroy" title="Destroy">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;destroy&quot;)">
               <span class="fa fa-power-off"></span>
@@ -204,7 +207,7 @@
           </button>
         </div>
         -->
-
+<!--
         <div class="btn-group btn-group-crop">
           <button type="button" class="btn btn-primary" data-method="getCroppedCanvas">
             
@@ -232,8 +235,10 @@
 
 
         </div>
-
+-->
         <!-- Show the cropped image in modal -->
+
+<!--
         <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -248,7 +253,20 @@
               </div>
             </div>
           </div>
-        </div><!-- /.modal -->
+        </div>
+-->
+        <!-- /.modal -->
+
+
+
+
+
+
+
+
+
+
+
 
 
 
