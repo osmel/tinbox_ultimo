@@ -451,6 +451,174 @@
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////Tratamiento de imagen////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////checar si existe el dato de IMAGEN q voy agregar//////////////////////////
+
+
+    public function check_existente_imagen($data){
+            $this->db->select("uid_imagen", FALSE);         
+            $this->db->from($this->fotocalendario_imagenes);
+      /*
+
+      $this->fotocalendario_imagenes    
+      $this->fotocalendario_imagenes_original
+      $this->fotocalendario_imagenes_recorte 
+
+      */
+            $where = '(
+                        (
+                          ( id_session =  "'.$data['id_session'].'" ) AND
+                          ( original =  "'.$data['nombre'].'" ) 
+                          
+                         )
+
+              )';   
+  
+            $this->db->where($where);
+            
+            $info = $this->db->get();
+            if ($info->num_rows() > 0) {
+                $fila = $info->row(); 
+                return $fila->uid_imagen;
+            }    
+            else
+                return false;
+            $info->free_result();
+    } 
+
+
+    /////////////////////////////////////////////    
+    /////////////////////////////////////////////
+
+////////////////////////////eliminar/////////////////////////////
+
+    public function eliminar_imagenes( $data ){
+        $this->db->delete( $this->fotocalendario_imagenes, array( 'uid_imagen' => $data ) );
+        if ( $this->db->affected_rows() > 0 ) return TRUE;
+        else return FALSE;
+    }
+
+    public function eliminar_imagenes_original( $data ){
+        $this->db->delete( $this->fotocalendario_imagenes_original, array( 'uid_imagen' => $data ) );
+        if ( $this->db->affected_rows() > 0 ) return TRUE;
+        else return FALSE;
+    }
+
+    public function eliminar_imagenes_recorte( $data ){
+        $this->db->delete( $this->fotocalendario_imagenes_recorte, array( 'uid_imagen' => $data ) );
+        if ( $this->db->affected_rows() > 0 ) return TRUE;
+        else return FALSE;
+    }
+
+
+
+/////////////////////////////////////////////    
+    /////////////////////////////////////////////
+
+////////////////////////////Agregar/////////////////////////////
+
+
+
+
+     public function anadir_imagenes($data){
+
+          $this->db->set('id_session', $data['id_session']);  
+          $this->db->set('uid_imagen', $data['uid_imagen']);  
+
+          $this->db->set('ano', $data['ano']);  
+          $this->db->set('mes', $data['mes']);  
+          $this->db->set('dia', $data['dia']);  
+
+          $this->db->set('original', $data['nombre']);  
+          $this->db->set('recorte', 'recorte_'.$data['nombre']);  
+
+          
+
+          $this->db->insert($this->fotocalendario_imagenes);
+          
+          if ($this->db->affected_rows() > 0){
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+                $result->free_result();
+
+
+     }
+
+
+      public function anadir_imagenes_original($data){
+
+             $this->db->set('id_session', $data['id_session']);  
+             $this->db->set('uid_imagen', $data['uid_imagen']);  
+                 $this->db->set('nombre', $data['nombre']);
+
+           $this->db->set('tipo_archivo', $data['tipo_archivo']);  
+                   $this->db->set('tipo', $data['tipo']);  
+                    $this->db->set('ext', $data['ext']);   
+                 $this->db->set('tamano', $data['tamano']);  
+                  $this->db->set('ancho', $data['ancho']);   
+                   $this->db->set('alto', $data['alto']);  
+
+                 $this->db->insert($this->fotocalendario_imagenes_original);
+           
+            if ($this->db->affected_rows() > 0){
+                    return TRUE;
+                } else {
+                    return FALSE;
+            }
+            $result->free_result();
+      }       
+     
+
+
+
+/*
+          foreach ($data['listadias'] as $llave => $valor) {
+
+
+               $this->db->set( 'uid_lista', $data['uid_lista'] );  
+               $this->db->set( 'ano', $valor['ano'] );  
+               $this->db->set( 'mes', $valor['mes'] );   //+1
+               $this->db->set( 'dia', $valor['dia'] );  
+               $this->db->set( 'valor', $valor['valor'] );  
+
+               $this->db->insert($this->fotocalendario_imagenes_original);
+
+            } 
+*/            
+
+
+     public function anadir_imagenes_recorte($data){
+         
+             $this->db->set('id_session', $data['id_session']);  
+             $this->db->set('uid_imagen', $data['uid_imagen']);  
+             $this->db->set('nombre', 'recorte_'.$data['nombre']);  
+
+          foreach ($data['datoimagen'] as $llave => $valor) {
+                 $this->db->set( $llave, $valor );  
+          } 
+
+          $this->db->insert($this->fotocalendario_imagenes_recorte);
+
+            
+            if ($this->db->affected_rows() > 0){
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+                $result->free_result();
+      } 
+
+
+     //fin de la lista
+
+
+
 
 	} 
 ?>

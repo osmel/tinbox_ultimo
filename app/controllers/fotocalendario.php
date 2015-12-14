@@ -15,17 +15,26 @@ class Fotocalendario extends CI_Controller {
 	public function guardar_imagen(){
 
 		//el true al final es para convertirlo a Array de lo contrario será objeto
+      	//datos de la imagen cropeada
       	$data['datoimagen']   = json_decode($_POST['datoimagen'],true);
+      	$data['id_session']   = ($_POST['session']);
 
-      	$data['session']   = ($_POST['session']);
-	
-	    foreach ($data['datoimagen'] as $llave => $valor) {
-	      		print_r($llave);
-	      		print_r($valor);
-	      		echo '<br/>';
-	    } 
- 
-		$idp =$data['session'];
+      	
+      		  $data['nombre']   = ($_POST['nombre']);
+        $data['tipo_archivo']   = ($_POST['tipo_archivo']);
+      		    $data['tipo']   = ($_POST['tipo']);
+      		     $data['ext']   = ($_POST['ext']);
+      		  $data['tamano']   = ($_POST['tamano']);
+      		   $data['ancho']   = ($_POST['ancho']);
+      		    $data['alto']   = ($_POST['alto']);
+
+
+      		     $data['ano']   = ($_POST['ano']);
+      		     $data['mes']   = ($_POST['mes']);
+      		     $data['dia']   = ($_POST['dia']);
+
+
+		$idp =$data['id_session'];
 		$dir=set_realpath('./uploads/'.$idp."/");  
 
 		if(!is_dir($dir)){  
@@ -33,24 +42,79 @@ class Fotocalendario extends CI_Controller {
 		}  
 
 		//http://www.re-cycledair.com/html-5-canvas-saving-to-a-file-with-php
-		$data = substr($_POST['croppedImage'], strpos($_POST['croppedImage'], ",") + 1);
-		$nombre = $_POST['nombre'];
-		  $tipo = $_POST['tipo'];
+		//guardar la imagen recortada 
+		$dato = substr($_POST['croppedImage'], strpos($_POST['croppedImage'], ",") + 1);
+		$nombre = $data['nombre'];
+		  
 
-		$decodedData = base64_decode($data);
-		$fp = fopen("uploads/".$idp."/".$nombre, 'wb');
+		$decodedData = base64_decode($dato);
+		$fp = fopen("uploads/".$idp."/"."recorte_".$nombre, 'wb');
 		fwrite($fp, $decodedData);
 		fclose($fp);
+
+
+   			  	/////////////////////////////*****************///////////////////////////////////////
+
+
+/*
+	    foreach ($data['datoimagen'] as $llave => $valor) {
+	      		print_r($llave);
+	      		print_r($valor);
+	      		echo '<br/>';
+	    } 
+*/
+
+	    	  $data['uid_imagen'] = 'uid_'.date('d').date('m').date('Y').'_'.random_string('alpha',4).random_string('numeric',3);                                
+
+   			  $checar          = $this->modelo_fotocalendario->check_existente_imagen( $data );
+				
+			   //si existe ya registros borrarlos para crear nuevo		          
+	          if ($checar!=false) {
+	        	  $eliminar          = $this->modelo_fotocalendario->eliminar_imagenes( $checar );
+		          $eliminar          = $this->modelo_fotocalendario->eliminar_imagenes_original( $checar );
+		          $eliminar          = $this->modelo_fotocalendario->eliminar_imagenes_recorte( $checar );
+	          }
+
+
+	        	  $guardar          = $this->modelo_fotocalendario->anadir_imagenes( $data );
+	        	  //print_r($guardar);
+					//return;
+
+		          $guardar          = $this->modelo_fotocalendario->anadir_imagenes_original( $data );
+		          $guardar          = $this->modelo_fotocalendario->anadir_imagenes_recorte( $data );
+
+/*
+	          if ( $guardar !== FALSE ){
+	            echo true;
+	          } else {
+	            echo '<span class="error"><b>E01</b> - El nuevo fotocalendario no pudo ser agregado</span>';
+	          }
+	*/
+
+
+
 	}	
 
 	public function upload(){
 
+		//crear carpeta
+		$data['session']  		 = ($_POST['session']);
+		$data['uid_original']    = $_POST['uid_original'];
+	
+		$idp =$data['session'];
+		$dir=set_realpath('./uploads/'.$idp."/");  
+
+		if(!is_dir($dir)){  
+		    mkdir($dir,0755,TRUE);  
+		}  
+
+
  		 	  if (!empty($_FILES)) {
 
-		          $config_adjunto['upload_path']    = './uploads/';
+		          $config_adjunto['upload_path']    = './uploads/'.$data['session'].'/';
 		          $config_adjunto['allowed_types']  = 'jpg|png|gif|jpeg';
 		          $config_adjunto['max_size']     = '20480';
-		          //$config_adjunto['file_name']    = 'img_'.$data['uid_fotocalendario'];
+		          $config_adjunto['file_name']    = 'Orig_'.$data['uid_original'];
 		          $config_adjunto['overwrite']    = true;
 
 		          $this->load->library('upload', $config_adjunto);
@@ -81,7 +145,7 @@ class Fotocalendario extends CI_Controller {
 
 						} 					  	
 					} 	 
-					$targetPath=   base_url().'uploads/'.$data['logo']['file_name'];      
+					$targetPath=   base_url().'uploads/'.$data['session'].'/'.$data['logo']['file_name'];      
 					echo '<div id="cont_img">';
 							echo '<img alto="'.$alto.'" ancho="'.$ancho.'" tamano="'.$tamano.'" ext="'.$ext.'" tipo="'.$tipo.'" tipo_archivo="'.$tipo_archivo.'" nombre="'.$nombre.'" id="image" src="'.$targetPath.'" style="max-width: 100%;" alt="Picture"/>';
 					echo '</div>'; 
@@ -144,12 +208,6 @@ class Fotocalendario extends CI_Controller {
 			   $data['id_session']   	 = $_POST['id_session']; //$this->input->post('posicionDiseno');
 			   $data['array_eliminar']   = $_POST['array_eliminar']; //$this->input->post('posicionDiseno');
 			    
-
-
-
-
-
-
 
 		} 
 		

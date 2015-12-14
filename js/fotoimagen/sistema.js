@@ -17,9 +17,26 @@ $(document).ready(function() {
 });
 
 function createFormData(image) {
+
+	var anoActual = new Date();
+
+	var dia = anoActual.getDay().toString();
+	var mes = anoActual.getMonth().toString();
+	var ano = anoActual.getFullYear().toString();
+
+	
+
+	var session = $('#session').val();
+	var uid_original = dia+' '+mes+' '+ano;
+	
+
+
 	var formImage = new FormData();
+
 	$('#cont_img').remove();
 	formImage.append('userImage', image[0]);
+	formImage.append('session', session);
+	formImage.append('uid_original', uid_original);
 	uploadFormData(formImage);
 }
 
