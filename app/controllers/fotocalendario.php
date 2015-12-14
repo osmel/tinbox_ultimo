@@ -12,20 +12,40 @@ class Fotocalendario extends CI_Controller {
         $this->load->library('Jquery_pagination');//-->la estrella del equipo		
 	}
 
-	public function upload(){
+	public function guardar_imagen(){
+
+		//el true al final es para convertirlo a Array de lo contrario será objeto
+      	$data['datoimagen']   = json_decode($_POST['datoimagen'],true);
+
+      	$data['session']   = ($_POST['session']);
+	
+	    foreach ($data['datoimagen'] as $llave => $valor) {
+	      		print_r($llave);
+	      		print_r($valor);
+	      		echo '<br/>';
+	    } 
+ 
+		$idp =$data['session'];
+		$dir=set_realpath('./uploads/'.$idp."/");  
+
+		if(!is_dir($dir)){  
+		    mkdir($dir,0755,TRUE);  
+		}  
+
 		//http://www.re-cycledair.com/html-5-canvas-saving-to-a-file-with-php
 		$data = substr($_POST['croppedImage'], strpos($_POST['croppedImage'], ",") + 1);
+		$nombre = $_POST['nombre'];
+		  $tipo = $_POST['tipo'];
+
 		$decodedData = base64_decode($data);
-		$fp = fopen("uploads/canvas.png", 'wb');
+		$fp = fopen("uploads/".$idp."/".$nombre, 'wb');
 		fwrite($fp, $decodedData);
 		fclose($fp);
-		
+	}	
 
-		
+	public function upload(){
 
  		 	  if (!empty($_FILES)) {
-
-
 
 		          $config_adjunto['upload_path']    = './uploads/';
 		          $config_adjunto['allowed_types']  = 'jpg|png|gif|jpeg';
@@ -35,29 +55,40 @@ class Fotocalendario extends CI_Controller {
 
 		          $this->load->library('upload', $config_adjunto);
 
-		          //$this->upload->do_upload(); 
-
 					foreach ($_FILES as $key => $value) {
 					    if ($this->upload->do_upload($key)) {
 								$data['logo'] = $this->upload->data();		
-								print_r($_FILES);
-						} else {
-							$data['logo']['file_name'] =$this->input->post('ca_logo');
-						}					  	
+								//print_r($_FILES);
+								//print_r($data['logo']);
+										$nombre= ($data['logo']['file_name']);
+								 		$tipo_archivo = ($data['logo']['file_type']);
+										$tipo = ($data['logo']['image_type']);
+
+										$ext = ($data['logo']['file_ext']);
+										$tamano = ($data['logo']['file_size']);
+										$ancho = ($data['logo']['image_width']);
+										$alto = ($data['logo']['image_height']);
+
+						/*
+							[file_name] => foco.jpg 
+							[file_type] => image/jpeg 
+							[image_type] => jpeg 
+							[file_ext] => .jpg 
+							[file_size] => 106.74 
+							[image_width] => 2048
+							[image_height] => 1365 
+						*/
+
+						} 					  	
 					} 	 
 					$targetPath=   base_url().'uploads/'.$data['logo']['file_name'];      
-					/*
-					echo '<div class="img-container" id="cont_img" style="height:520px;width:520px;">';
-							echo '<img id="image" src="'.$targetPath.'" style="height:100%;width:100%;" alt="Picture"/>';
-					echo '</div>'; 
-					*/
 					echo '<div id="cont_img">';
-							echo '<img id="image" src="'.$targetPath.'" style="max-width: 100%;" alt="Picture"/>';
+							echo '<img alto="'.$alto.'" ancho="'.$ancho.'" tamano="'.$tamano.'" ext="'.$ext.'" tipo="'.$tipo.'" tipo_archivo="'.$tipo_archivo.'" nombre="'.$nombre.'" id="image" src="'.$targetPath.'" style="max-width: 100%;" alt="Picture"/>';
 					echo '</div>'; 
 
 		          
 		      } 
-				   echo '<script src="'.base_url().'js/fotoimagen/cropear/demo/js/main.js" type="text/javascript"></script>';
+				   echo '<script src="'.base_url().'js/fotoimagen/main.js" type="text/javascript"></script>';
 
 
 	}	

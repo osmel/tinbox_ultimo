@@ -2,6 +2,7 @@
 
 <?php $this->load->view( 'sitio/fotoimagen/header' ); ?>      
 
+<input type="text" id="session" name="session" value="<?php echo $session; ?>" >
 
   <!-- Content -->
    <button id="guardar" type="button" class="btn btn-primary"> guardar</button>
@@ -94,7 +95,7 @@
             </span>
           </button>
         </div>
-
+        -->
         <div class="btn-group">
           <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, 0.1)">
@@ -108,6 +109,7 @@
           </button>
         </div>
 
+         <!--
         <div class="btn-group">
           <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;move&quot;, -10, 0)">
@@ -130,7 +132,7 @@
             </span>
           </button>
         </div>
-
+-->
         <div class="btn-group">
           <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, -45)">
@@ -143,7 +145,7 @@
             </span>
           </button>
         </div>
-
+ 
         <div class="btn-group">
           <button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;scaleX&quot;, -1)">
@@ -156,7 +158,7 @@
             </span>
           </button>
         </div>
-
+ <!--
         <div class="btn-group">
           <button type="button" class="btn btn-primary" data-method="crop" title="Crop">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;crop&quot;)">

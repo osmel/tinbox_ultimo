@@ -24,6 +24,18 @@
       $this->fotocalendario_lista    = $this->db->dbprefix('fotocalendario_lista');
       $this->lista_nombre_meses    = $this->db->dbprefix('lista_nombre_meses');
       $this->lista_fechas_especiales    = $this->db->dbprefix('lista_fechas_especiales');
+
+
+
+      $this->fotocalendario_imagenes    = $this->db->dbprefix('fotocalendario_imagenes');
+      $this->fotocalendario_imagenes_original    = $this->db->dbprefix('fotocalendario_imagenes_original');
+      $this->fotocalendario_imagenes_recorte    = $this->db->dbprefix('fotocalendario_imagenes_recorte');
+
+
+
+
+
+
 		}
 
 ///////////////////checar si existe el dato q voy agregar//////////////////////////

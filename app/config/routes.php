@@ -65,6 +65,8 @@ $route['fotoimagen/(:any)']							= 'fotocalendario/fotoimagen/$1';
 
 $route['upload']							= 'fotocalendario/upload';
 
+$route['guardar_imagen']							= 'fotocalendario/guardar_imagen';
+
 
 
 
