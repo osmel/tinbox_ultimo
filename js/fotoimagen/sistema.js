@@ -1,19 +1,24 @@
 $(document).ready(function() {
 	$("#drop-area").on('dragenter', function (e){
-	e.preventDefault();
-	$(this).css('background', '#BBD5B8');
+		e.preventDefault();
+		$(this).css('background', '#BBD5B8');
 	});
 
 	$("#drop-area").on('dragover', function (e){
-	e.preventDefault();
+		e.preventDefault();
 	});
 
 	$("#drop-area").on('drop', function (e){
-	$(this).css('background', '#D8F9D3');
-	e.preventDefault();
-	var image = e.originalEvent.dataTransfer.files;
-	createFormData(image);
+		$(this).css('background', '#D8F9D3');
+		e.preventDefault();
+		var image = e.originalEvent.dataTransfer.files;
+		createFormData(image);
 	});
+
+	var session = $('#session').val();
+	//alert(session+' aqui es donde voy a cargar la imagen');
+	buscarImagen(session);
+
 });
 
 function createFormData(image) {
@@ -42,14 +47,29 @@ function createFormData(image) {
 
 function uploadFormData(formData) {
 	$.ajax({
-	url: "http://localhost/tinbox/upload",
-	type: "POST",
-	data: formData,
-	contentType:false,
-	cache: false,
-	processData: false,
-	success: function(data){
-		$('#drop-area').append(data);
-	}
-});
+		url: "http://localhost/tinbox/upload",
+		type: "POST",
+		data: formData,
+		contentType:false,
+		cache: false,
+		processData: false,
+		success: function(data){
+			$('#drop-area').append(data);
+		}
+	});
+}
+
+
+function buscarImagen(session) {
+	$.ajax({
+		url: "http://localhost/tinbox/buscarimagen",
+		type: "POST",
+		data: {
+			session:session	
+		},
+		success: function(data){
+			//mostrar la imagen
+			$('#drop-area').append(data);
+		}
+	});
 }

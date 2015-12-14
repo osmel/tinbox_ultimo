@@ -12,6 +12,13 @@ class Fotocalendario extends CI_Controller {
         $this->load->library('Jquery_pagination');//-->la estrella del equipo		
 	}
 
+
+	public function buscarImagen(){
+		
+		echo 'osmel calderon bernal';		
+		
+	}	
+
 	public function guardar_imagen(){
 
 		//el true al final es para convertirlo a Array de lo contrario será objeto
@@ -164,6 +171,10 @@ class Fotocalendario extends CI_Controller {
 		
 	}
 
+
+
+
+	
 
 	public function index(){
 
