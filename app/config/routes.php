@@ -69,6 +69,8 @@ $route['guardar_imagen']							= 'fotocalendario/guardar_imagen';
 
 $route['buscarimagen']							= 'fotocalendario/buscarimagen';
 
+$route['imagen_encontrada']							= 'fotocalendario/imagen_encontrada';
+
 
 
 

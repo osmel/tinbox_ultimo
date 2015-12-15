@@ -46,12 +46,21 @@
   
 
 
-<!-- Arrastrar imagenes
+<!-- 
+    Arrastrar imagenes
        <script type="text/javascript" src="<?php echo base_url(); ?>js/dist/min/dropzone.min.js"></script>
        <script type="text/javascript" src="<?php echo base_url(); ?>js/dropzone.js"></script>
        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>js/dist/min/basic.min.css">
-  
 -->
+
+
+  <!-- Plugins dependiente para mostrar las fechas 
+    <script src="js/fotoimagen/moment.js" type="text/javascript"></script>
+
+    <script src="js/fotoimagen/estrategas.calendarioEventos.js" type="text/javascript"></script>
+    <script src="js/fotoimagen/calendario.js" type="text/javascript"></script>
+-->
+
     <script src="<?php echo base_url(); ?>js/fotoimagen/sistema.js" type="text/javascript"></script>
 
 

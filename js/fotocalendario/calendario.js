@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-				//$('#id_session').val()
-
 				array_eliminar = $('#array_eliminar').val();
 
 				$.miespacionombre = { 

@@ -603,6 +603,12 @@
                  $this->db->set( $llave, $valor );  
           } 
 
+
+          foreach ($data['datocanvas'] as $llave => $valor) {
+                 $this->db->set( 'c'.$llave, $valor );  
+          } 
+
+
           $this->db->insert($this->fotocalendario_imagenes_recorte);
 
             
@@ -618,6 +624,36 @@
      //fin de la lista
 
 
+
+    public function buscar_imagen($data){
+
+            $this->db->select("i.id, i.id_session, i.uid_imagen, i.ano, i.mes, i.dia");         
+            $this->db->select("o.nombre original, o.tipo_archivo, o.tipo, o.ext, o.tamano, o.ancho, o.alto");         
+            $this->db->select("r.nombre recorte, r.aspectRatio, r.height, r.left, r.naturalHeight, r.naturalWidth, r.rotate, r.scaleX, r.scaleY, r.top, r.width");         
+            $this->db->select("r.cwidth, r.cheight, r.cnaturalWidth, r.cnaturalHeight,  r.cleft, r.ctop");         
+            
+
+            $this->db->from($this->fotocalendario_imagenes.' As i');
+            $this->db->join($this->fotocalendario_imagenes_original.' As o', 'i.uid_imagen = o.uid_imagen','LEFT');
+            $this->db->join($this->fotocalendario_imagenes_recorte.' As r', 'i.uid_imagen = r.uid_imagen','LEFT');
+
+            $where = '(
+                        (
+                          ( i.id_session =  "'.$data['id_session'].'" )                          
+                         )
+
+              )';   
+  
+            $this->db->where($where);
+            
+            $info = $this->db->get();
+            if ($info->num_rows() > 0) {
+                return $info->row(); 
+            }    
+            else
+                return false;
+            $info->free_result();
+    } 
 
 
 	} 

@@ -14,16 +14,123 @@ class Fotocalendario extends CI_Controller {
 
 
 	public function buscarImagen(){
-		
-		echo 'osmel calderon bernal';		
+		$data['id_session']   = $_POST['id_session'];
+
+		$data['datos']          = $this->modelo_fotocalendario->buscar_imagen( $data );
+				/*
+				$targetPath=   base_url().'uploads/'.$data['session'].'/'.$data['logo']['file_name'];      
+					echo '<div id="cont_img">';
+							echo '<img alto="'.$alto.'" ancho="'.$ancho.'" tamano="'.$tamano.'" ext="'.$ext.'" tipo="'.$tipo.'" tipo_archivo="'.$tipo_archivo.'" nombre="'.$nombre.'" id="image" src="'.$targetPath.'" style="max-width: 100%;" alt="Picture"/>';
+					echo '</div>'; 
+
+		          
+		      } */
+			//print_r($data['datos']->recorte);
+				$targetPath =   base_url().'uploads/'.$data['id_session'].'/'.$data['datos']->original;
+
+					$nombre= $data['datos']->original;
+					$tipo_archivo = $data['datos']->tipo_archivo;
+					$tipo = $data['datos']->tipo;
+
+					$ext = $data['datos']->ext;
+					$tamano = $data['datos']->tamano;
+					$ancho = $data['datos']->ancho;
+					$alto = $data['datos']->alto;
+
+					$cleft = $data['datos']->cleft;
+					$ctop = $data['datos']->ctop;
+					$cwidth = $data['datos']->cwidth;
+					$cheight = $data['datos']->cheight;
+
+				  
+					$img_canva= '<div id="cont_img">';
+							$img_canva .= '<img cleft="'.$cleft.'" ctop="'.$ctop.'" cwidth="'.$cwidth.'" cheight="'.$cheight.'" alto="'.$alto.'" ancho="'.$ancho.'" tamano="'.$tamano.'" ext="'.$ext.'" tipo="'.$tipo.'" tipo_archivo="'.$tipo_archivo.'" nombre="'.$nombre.'" id="image" src="'.$targetPath.'" style="max-width: 100%;" alt="Picture"/>';
+					$img_canva .= '</div>'; 
+
+
+
+		$data['imagen'] = $img_canva.'<script src="'.base_url().'js/fotoimagen/main.js" type="text/javascript"></script>';
+		echo json_encode($data);
+		 
+
+		/*
+		stdClass Object ( [id] => 344 [id_session] => 7EpR8NOuxKhtfraApYi1 [uid_imagen] => uid_15122015_PQZW628 [ano] => 2015 [mes] => 11 [dia] => 2 [original] => Orig_2_11_2015.jpg [tipo_archivo] => image/jpeg [tipo] => jpeg [ext] => .jpg [tamano] => 99.18 [ancho] => 789 [alto] => 280 [recorte] => recorte_Orig_2_11_2015.jpg [aspectRatio] => 2.81786 [height] => 556.882 [left] => -32.9185 [naturalHeight] => 280 [naturalWidth] => 789 [rotate] => 45 [scaleX] => -1 [scaleY] => 1 [top] => 473.247 [width] => 1569.21 )
+
+		*/
 		
 	}	
+
+
+	public function imagen_encontrada(){
+
+		//crear carpeta
+		$data['session']  		 = ($_POST['session']);
+		$data['uid_original']    = $_POST['uid_original'];
+	
+		$idp =$data['session'];
+		$dir=set_realpath('./uploads/'.$idp."/");  
+
+		if(!is_dir($dir)){  
+		    mkdir($dir,0755,TRUE);  
+		}  
+
+
+ 		 	  if (!empty($_FILES)) {
+
+		          $config_adjunto['upload_path']    = './uploads/'.$data['session'].'/';
+		          $config_adjunto['allowed_types']  = 'jpg|png|gif|jpeg';
+		          $config_adjunto['max_size']     = '20480';
+		          $config_adjunto['file_name']    = 'Orig_'.$data['uid_original'];
+		          $config_adjunto['overwrite']    = true;
+
+		          $this->load->library('upload', $config_adjunto);
+
+					foreach ($_FILES as $key => $value) {
+					    if ($this->upload->do_upload($key)) {
+								$data['logo'] = $this->upload->data();		
+								//print_r($_FILES);
+								//print_r($data['logo']);
+										$nombre= ($data['logo']['file_name']);
+								 		$tipo_archivo = ($data['logo']['file_type']);
+										$tipo = ($data['logo']['image_type']);
+
+										$ext = ($data['logo']['file_ext']);
+										$tamano = ($data['logo']['file_size']);
+										$ancho = ($data['logo']['image_width']);
+										$alto = ($data['logo']['image_height']);
+
+						/*
+							[file_name] => foco.jpg 
+							[file_type] => image/jpeg 
+							[image_type] => jpeg 
+							[file_ext] => .jpg 
+							[file_size] => 106.74 
+							[image_width] => 2048
+							[image_height] => 1365 
+						*/
+
+						} 					  	
+					} 	 
+					$targetPath=   base_url().'uploads/'.$data['session'].'/'.$data['logo']['file_name'];      
+					echo '<div id="cont_img">';
+							echo '<img alto="'.$alto.'" ancho="'.$ancho.'" tamano="'.$tamano.'" ext="'.$ext.'" tipo="'.$tipo.'" tipo_archivo="'.$tipo_archivo.'" nombre="'.$nombre.'" id="image" src="'.$targetPath.'" style="max-width: 100%;" alt="Picture"/>';
+					echo '</div>'; 
+
+		          
+		      } 
+				   echo '<script src="'.base_url().'js/fotoimagen/main.js" type="text/javascript"></script>';
+
+
+	}	
+
+
 
 	public function guardar_imagen(){
 
 		//el true al final es para convertirlo a Array de lo contrario será objeto
       	//datos de la imagen cropeada
       	$data['datoimagen']   = json_decode($_POST['datoimagen'],true);
+      	$data['datocanvas']   = json_decode($_POST['datocanvas'],true);
       	$data['id_session']   = ($_POST['session']);
 
       	

@@ -60,16 +60,30 @@ function uploadFormData(formData) {
 }
 
 
-function buscarImagen(session) {
+function buscarImagen(id_session) {
 	$.ajax({
 		url: "http://localhost/tinbox/buscarimagen",
 		type: "POST",
 		data: {
-			session:session	
+			id_session:id_session	
 		},
+		dataType: 'json',
 		success: function(data){
 			//mostrar la imagen
-			$('#drop-area').append(data);
+			console.log(data);
+				if (data.datos != []) {
+					$.each((data.datos), function (i, valor) { //$.parseJSON
+						console.log(i+':'+valor);
+						//$('#drop-area').append(i+':'+valor);
+					});
+					//console.log('a');
+					
+				}
+
+			$('#drop-area').append(data.imagen);		
+			//$('#drop-area').append(data.datos.recorte);	
+
+			
 		}
 	});
 }
