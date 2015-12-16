@@ -15,8 +15,8 @@ $(document).ready(function() {
 		createFormData(image);
 	});
 
+	//1- cuando carga la pagina checar si hay imagenes
 	var session = $('#session').val();
-	//alert(session+' aqui es donde voy a cargar la imagen');
 	buscarImagen(session);
 
 });
@@ -38,6 +38,7 @@ function createFormData(image) {
 
 	var formImage = new FormData();
 
+	//LIMPIAR PRIMERO EL COMPONENTE
 	$('#cont_img').remove();
 	formImage.append('userImage', image[0]);
 	formImage.append('session', session);
@@ -45,6 +46,7 @@ function createFormData(image) {
 	uploadFormData(formImage);
 }
 
+//2 ARRASTRA IMAGEN
 function uploadFormData(formData) {
 	$.ajax({
 		url: "http://localhost/tinbox/upload",
@@ -54,12 +56,15 @@ function uploadFormData(formData) {
 		cache: false,
 		processData: false,
 		success: function(data){
+			//var daa = '<div id="cont_img"><img id_diseno="1" id="image" src="http://localhost/tinbox/uploads/BjDzaRqO5QnKIuSdmv/Orig_3_11_2015.png" style="max-width: 100%;" alt="Picture" class="cropper-hidden"></div>'+'<script src="http://localhost/tinbox/js/fotoimagen/main.js" type="text/javascript"></script>';
+			//$('#drop-area').append(daa);
 			$('#drop-area').append(data);
 		}
 	});
 }
 
 
+//1
 function buscarImagen(id_session) {
 	$.ajax({
 		url: "http://localhost/tinbox/buscarimagen",
@@ -70,19 +75,17 @@ function buscarImagen(id_session) {
 		dataType: 'json',
 		success: function(data){
 			//mostrar la imagen
-			console.log(data);
+			    //console.log(data);
 				if (data.datos != []) {
 					$.each((data.datos), function (i, valor) { //$.parseJSON
-						console.log(i+':'+valor);
+						//console.log(i+':'+valor);
 						//$('#drop-area').append(i+':'+valor);
 					});
-					//console.log('a');
 					
 				}
-
-			$('#drop-area').append(data.imagen);		
 			//$('#drop-area').append(data.datos.recorte);	
 
+			$('#drop-area').append(data.imagen);
 			
 		}
 	});

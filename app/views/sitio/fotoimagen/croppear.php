@@ -9,12 +9,32 @@
    
   <div class="container">
 
+  <!--
     <div class="row">
         <span class="page-header">Enero</span> 
         <button id="anterior" type="button" class="btn btn-info">MES ANTERIOR</button>
         <button id="siguiente" type="button" class="btn btn-info">MES SIGUIENTE</button>
      </div>
-     
+ -->
+ 
+              <div id="meses" class="row">  
+                <div class="col-md-4">  </div>
+                <div class="col-md-4">  
+                  <div class="col-xs-2 col-md-1"><a id="mes1" nmes="0" class="calendarioEventos-flecha1 botonMes" >Ene</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes2" nmes="1" class="calendarioEventos-flecha1 botonMes" >Feb</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes3" nmes="2" class="calendarioEventos-flecha1 botonMes" >Mar</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes4" nmes="3" class="calendarioEventos-flecha1 botonMes" >Abr</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes5" nmes="4" class="calendarioEventos-flecha1 botonMes" >May</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes6" nmes="5" class="calendarioEventos-flecha1 botonMes" >Jun</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes7" nmes="6" class="calendarioEventos-flecha1 botonMes" >Jul</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes8" nmes="7" class="calendarioEventos-flecha1 botonMes" >Ago</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes9" nmes="8" class="calendarioEventos-flecha1 botonMes" >Sep</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes10" nmes="9" class="calendarioEventos-flecha1 botonMes" >Oct</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes11" nmes="10" class="calendarioEventos-flecha1 botonMes" >Nov</a></div>
+                  <div class="col-xs-2 col-md-1"><a id="mes12" nmes="11" class="calendarioEventos-flecha1 botonMes" >Dic</a></div>
+                </div>
+              </div>
+
     
     <div class="row">
       
@@ -26,16 +46,9 @@
       
 
       <div class="col-md-6" id="drop-area" style="max-width:520px;min-height:520px; padding:10px;border: 2px solid blue;">         
-
-
-
-      <!--
-      <div class="col-md-6" id="drop-area" style="min-height:520px; padding:10px;border: 2px solid blue;">         
          
-        <div class="img-container" id="cont_img">
-          <img id="image" style="height:100%;width:100%" src="<?php echo base_url(); ?>js/fotoimagen/cropear/assets/img/picture.jpg" alt="Picture">
-        </div>
-        -->
+
+        
       </div>
  
 
