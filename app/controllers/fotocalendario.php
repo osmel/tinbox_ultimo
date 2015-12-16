@@ -41,14 +41,18 @@ class Fotocalendario extends CI_Controller {
 					$ctop = $data['datos']->ctop;
 					$cwidth = $data['datos']->cwidth;
 					$cheight = $data['datos']->cheight;
+					
+					$naturalWidth = $data['datos']->cnaturalWidth;
+					$naturalHeight = $data['datos']->cnaturalHeight;
 
 					$rotate = $data['datos']->rotate;
 					$scaleX = $data['datos']->scaleX;
 					$scaleY = $data['datos']->scaleY;
-
+					$ratio = $data['datos']->aspectRatio;
+					
 				  
 					$img_canva= '<div id="cont_img">';
-							$img_canva .= '<img rotate="'.$rotate.'" scaleX="'.$scaleX.'" scaleY="'.$scaleY.'"
+							$img_canva .= '<img naturalWidth="'.$naturalWidth.'" naturalHeight="'.$naturalHeight.'" ratio="'.$ratio.'" rotate="'.$rotate.'" scalex="'.$scaleX.'" scaley="'.$scaleY.'"
 							cleft="'.$cleft.'" ctop="'.$ctop.'" cwidth="'.$cwidth.'" cheight="'.$cheight.'" alto="'.$alto.'" ancho="'.$ancho.'" tamano="'.$tamano.'" ext="'.$ext.'" tipo="'.$tipo.'" tipo_archivo="'.$tipo_archivo.'" nombre="'.$nombre.'" id="image" src="'.$targetPath.'" style="max-width: 100%;" alt="Picture"/>';
 					$img_canva .= '</div>'; 
 

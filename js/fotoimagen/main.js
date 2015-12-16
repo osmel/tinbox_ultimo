@@ -78,10 +78,19 @@ $(function () {
             var cheight = parseFloat($('#image').attr('height'));
               var cleft = parseFloat($('#image').attr('cleft'));
                var ctop = parseFloat($('#image').attr('ctop'));
+
+               var naturalWidth = parseFloat($('#image').attr('naturalWidth'));
+               var naturalHeight = parseFloat($('#image').attr('naturalHeight'));
+
+               
+               
+               
                var rotate = ($('#image').attr('rotate'));
 
-               var scaleX = parseInt($('#image').attr('scaleX'));
-               var scaleY = parseInt($('#image').attr('scaleY'));
+               var scaleX = parseInt($('#image').attr('scalex'));
+               var scaleY = parseInt($('#image').attr('scaley'));
+               var ratio = parseInt($('#image').attr('ratio'));
+
 
                 //$('#image').cropper('setCropBoxData',{
                 $('#image').cropper('setCanvasData',{
@@ -89,14 +98,23 @@ $(function () {
                     height: cheight,
                     left:cleft,
                      top:ctop,
-                     //naturalWidth:960,
-                     //naturalHeight:540
+                     naturalWidth:naturalWidth,
+                     naturalHeight:naturalHeight
+                     
+/*
+                    width: 375,
+                    height: 500,
+                    left:62.5,
+                     top:0,                     */
                 });
 
-                $('#image').cropper('rotateTo',rotate);
-
+                $('#image').cropper('rotate',rotate);
+                
                 $('#image').cropper('scaleX', scaleX);
                 $('#image').cropper('scaleY', scaleY);
+                
+               //$('#image').cropper('scale', scaleX,scaleY);
+               $('#image').cropper('setAspectRatio', ratio);
 
 
                 /*
