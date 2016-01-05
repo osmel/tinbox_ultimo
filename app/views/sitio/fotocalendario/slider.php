@@ -22,7 +22,7 @@
                           </div>
                           
 
-                          <!--
+                          
                           <div class="row">---- </div>
                           
                           <div class="row cuadro_slider" value="2">
@@ -81,7 +81,7 @@
 
                               <img src="http://placehold.it/150x150" style="border:1px solid;">
                           </div>                                                                        
-                         --> 
+                         
                   </div>  
             </div> 
 

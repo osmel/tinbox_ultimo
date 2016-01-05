@@ -1,4 +1,12 @@
 $(document).ready(function() {
+
+	//marcar el elemento activo
+	jQuery('.editar_slider[value="'+($('#id_diseno').val())+'"]').parent().parent().css({"border-color": "red", 
+	             								"border-weight":"8px", 	
+	             								"border-style":"solid"});
+
+
+
 	$("#drop-area").on('dragenter', function (e){
 		e.preventDefault();
 		$(this).css('background', '#BBD5B8');
@@ -16,23 +24,31 @@ $(document).ready(function() {
 	});
 
 	//1- cuando carga la pagina checar si hay imagenes
-	var session = $('#session').val();
-	buscarImagen(session);
+	
+	buscarImagen();
 
 });
 
+
+
 function createFormData(image) {
 
+	/*
 	var anoActual = new Date();
-
 	var dia = anoActual.getDay().toString();
 	var mes = anoActual.getMonth().toString();
 	var ano = anoActual.getFullYear().toString();
 
-	
-
 	var session = $('#session').val();
-	var uid_original = dia+' '+mes+' '+ano;
+	*/
+
+  var session = $('#session').val();
+  var id_diseno = $('#id_diseno').val();
+  var ano = $('#ano').val();
+  var mes = $('#mes').val();
+
+
+	var uid_original = id_diseno+'_'+ano+'_'+mes;
 	
 
 
@@ -64,13 +80,73 @@ function uploadFormData(formData) {
 }
 
 
+$('body').on('click','.mes', function (e) {
+
+	//que no vuelva a cargar el mismo
+    if ( ($('#mes').val())!=($(this).attr('nmes')) ) {
+		   $('#guardar').trigger('click');
+
+		   mes = $(this).attr('nmes')
+		   $('#mes').val(mes);
+
+
+		   $('#id_diseno').val(1);
+
+
+		   $('#cont_img').remove();
+
+		   
+			//jQuery("#"+dependencia).trigger('change');
+		  // buscarImagen();
+
+
+    }
+});	
+
+/*
+$('body').on('click', '#guardar', function () {
+   
+
+		    var existe = ($('#image').attr('nombre'));	
+
+			if ( existe != undefined) {
+			   //console.log($('#image').attr('nombre'));	
+			   $('#guardar').trigger('click');
+			} 
+			
+
+
+		   //console.log($(this).attr('nmes'));
+		   mes = "0"; //pasar a enero del proximo diseno $(this).attr('nmes')
+		   $('#mes').val(mes);
+		   $('#cont_img').remove();
+
+		   
+			//jQuery("#"+dependencia).trigger('change');
+		   buscarImagen();
+
+
+});
+*/
+
+
+
 //1
-function buscarImagen(id_session) {
+function buscarImagen() {
+	  
+	  var id_session = $('#session').val();
+	  var id_diseno = $('#id_diseno').val();
+	  var ano = $('#ano').val();
+	  var mes = $('#mes').val();
+
 	$.ajax({
 		url: "http://localhost/tinbox/buscarimagen",
 		type: "POST",
 		data: {
-			id_session:id_session	
+			id_session: id_session,
+			 id_diseno: id_diseno,
+			 	   ano: ano,
+			 	   mes: mes
 		},
 		dataType: 'json',
 		success: function(data){
@@ -90,3 +166,6 @@ function buscarImagen(id_session) {
 		}
 	});
 }
+
+
+

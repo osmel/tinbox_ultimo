@@ -39,10 +39,6 @@
     <!-- Mi estilo -->
     <?php  echo link_tag('css/estilo.css'); ?>
 
-       <!-- Estilo del calendario -->
-    <link rel="stylesheet" href="css/fotocalendario/calendarioEventos.css">
-
-
     <!-- Scripts croppear  -->
     <script src="<?php echo base_url(); ?>js/fotoimagen/cropear/dist/cropper.js" type="text/javascript"></script>
     

@@ -51,7 +51,7 @@ $route['404_override'] 					= '';
 $route['validacion_comprimir']							= 'fotocalendario/validacion_comprimir';
 
 $route['fotocalendario']							= 'fotocalendario/index';
-$route['validar_nuevo_fotocalendario']							= 'fotocalendario/validar_nuevo_fotocalendario';
+$route['validar_nuevo_fotocalendario']				= 'fotocalendario/validar_nuevo_fotocalendario';
 
 $route['guardar_lista']							= 'fotocalendario/guardar_lista';
 $route['noguardar_lista']							= 'fotocalendario/noguardar_lista';
@@ -61,15 +61,13 @@ $route['leer_lista']							= 'fotocalendario/leer_lista';
 $route['diseno_lista']							= 'fotocalendario/diseno_lista';
 
 ///////////////////////////////////////imagen//////////////////////////////////////////
-$route['fotoimagen/(:any)']							= 'fotocalendario/fotoimagen/$1';
+$route['fotoimagen/(:any)']							= 'fotoimagen/index/$1';
+$route['imagen_encontrada']							= 'fotoimagen/imagen_encontrada';
+$route['guardar_imagen']							= 'fotoimagen/guardar_imagen';
+$route['upload']									= 'fotoimagen/upload';
+$route['buscarimagen']								= 'fotoimagen/buscarimagen';
 
-$route['upload']							= 'fotocalendario/upload';
 
-$route['guardar_imagen']							= 'fotocalendario/guardar_imagen';
-
-$route['buscarimagen']							= 'fotocalendario/buscarimagen';
-
-$route['imagen_encontrada']							= 'fotocalendario/imagen_encontrada';
 
 
 
